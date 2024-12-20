@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Secure Communication System{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg rounded-lg">
+        <h3 class="text-2xl font-bold text-center">Welcome to Secure Communication System</h3>
+        <form action="{{ url_for('routes.login') }}" method="post">
+            <div class="mt-4">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Select Role</label>
+                    <select name="role" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Username</label>
+                    <input type="text" name="username" placeholder="Enter Username"
+                           class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Password</label>
+                    <input type="password" name="password" placeholder="Enter Password"
+                           class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Show system IP address for remote login
+    $.get('https://api.ipify.org?format=json', function(data) {
+        $('<div>').addClass('text-center mt-4 text-gray-600')
+                  .text('System IP: ' + data.ip)
+                  .appendTo('.bg-white');
+    });
+});
+</script>
+{% endblock %}
